@@ -1,0 +1,1 @@
+convert "$1" -normalize -modulate 100,140,100 -auto-gamma -posterize 4 -dither None -scale 10% -scale 1000% "$2"
