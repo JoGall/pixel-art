@@ -1,0 +1,40 @@
+(define (script-fu-pixel-art image n-col)
+    (let*
+        (
+            (saturation +20)
+            (contrast 3)
+            (n-col 16)
+            (cur-width  (car (gimp-image-width drawable)))
+            (cur-height (car (gimp-image-height drawable)))
+                        (new-width  (* ratio cur-width))
+                        (new-height (* ratio cur-height))
+            (new_ratio      (min (/ new-width cur-width) (/ new-height cur-height)))
+            (width      (* new_ratio cur-width))
+            (height     (* new_ratio cur-height))
+                        )
+        )
+    ; Start
+    (gimp-image-undo-group-start image)
+    (gimp-selection-none image)
+    
+    ; Saturation
+    (gimp-hue-saturation drawable 0 0 0 saturation)
+    
+    ; Contrast
+    (gimp-brightness-contrast drawable 0 contrast)
+    
+    ; Index colours
+    (gimp-image-convert-indexed drawable 0 0 n-col 0 0)
+
+    ; Scale image
+    (gimp-image-scale img width height)
+
+    ; Increase image size
+    
+
+    ; End
+    (gimp-image-undo-group-end image)
+    (gimp-displays-flush)
+
+    )
+)
